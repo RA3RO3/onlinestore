@@ -32,40 +32,64 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Welcome to Our Store'),
+        backgroundColor:  Color.fromRGBO(219, 208, 241, 1),  
       ),
-      body: Center(
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Color(0xFF8A2BE2), // Purple
+              Color(0xFFADD8E6), // Light Blue
+            ],
+            begin: Alignment.bottomRight,
+            end: Alignment.topLeft,
+          ),
+        ), child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            Image.asset(
+              'assets/pclogo.png', // Assuming your image is named 'pclogo.png' and located in the assets folder
+              height: 240, // Adjust height as needed
+              width: 240, // Adjust width as needed
+            ),
+            SizedBox(height: 100),
             ElevatedButton(
               onPressed: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => LoginPage()),
                 );
-              },style: ElevatedButton.styleFrom(
-              minimumSize: Size(200, 38),  // Set the desired width and height
+              },
+              style: ElevatedButton.styleFrom(
+                minimumSize: Size(260, 45),
+                backgroundColor: Color.fromRGBO(219, 208, 241, 1),  // Set the desired width and height
               ),
               child: Text('Login'),
+              
             ),
+            SizedBox(height: 20), // Add space between button
             ElevatedButton(
               onPressed: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => SignUpPage()),
                 );
-                
-              },style: ElevatedButton.styleFrom(
-              minimumSize: Size(200, 38),  // Set the desired width and height
+              },
+              style: ElevatedButton.styleFrom(
+                minimumSize: Size(260, 45), 
+                backgroundColor: Color.fromRGBO(219, 208, 241, 1), // Set the desired width and height
               ),
               child: Text('Sign Up'),
             ),
           ],
         ),
       ),
+    )
     );
   }
 }
+
 
 class LoginPage extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
@@ -77,8 +101,19 @@ class LoginPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Login'),
+        backgroundColor:  Color.fromRGBO(219, 208, 241, 1),  
       ),
-      body: Padding(
+      body:Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Color(0xFF8A2BE2), // Purple
+              Color(0xFFADD8E6), // Light Blue
+            ],
+            begin: Alignment.bottomRight,
+            end: Alignment.topLeft,
+          ),
+        ), child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(
           key: _formKey,
@@ -112,7 +147,7 @@ class LoginPage extends StatelessWidget {
                   return null;
                 },
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 40),
               ElevatedButton(
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
@@ -132,12 +167,19 @@ class LoginPage extends StatelessWidget {
                     }
                   }
                 },
+                 style: ElevatedButton.styleFrom(
+                minimumSize: Size(320, 45),
+                backgroundColor: Color.fromRGBO(219, 208, 241, 1),
+                 ),
+                
                 child: Text('Login'),
+                
               ),
             ],
           ),
         ),
       ),
+    )
     );
   }
 }
@@ -153,8 +195,19 @@ class SignUpPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Sign Up'),
+        backgroundColor:  Color.fromRGBO(219, 208, 241, 1),  
       ),
-      body: Padding(
+      body:Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Color(0xFF8A2BE2), // Purple
+              Color(0xFFADD8E6), // Light Blue
+            ],
+            begin: Alignment.bottomRight,
+            end: Alignment.topLeft,
+          ),
+        ), child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(
           key: _formKey,
@@ -202,7 +255,7 @@ class SignUpPage extends StatelessWidget {
                   return null;
                 },
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 40),
               ElevatedButton(
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
@@ -213,13 +266,18 @@ class SignUpPage extends StatelessWidget {
                     );
                     Navigator.pop(context);
                   }
-                },
+                },style: ElevatedButton.styleFrom(
+                minimumSize: Size(320, 45),
+                backgroundColor: Color.fromRGBO(219, 208, 241, 1),
+               
+                ),
                 child: Text('Register'),
               ),
             ],
           ),
         ),
       ),
+    )
     );
   }
 }
