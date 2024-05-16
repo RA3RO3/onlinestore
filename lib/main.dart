@@ -32,64 +32,63 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Welcome to Our Store'),
-        backgroundColor:  Color.fromRGBO(219, 208, 241, 1),  
+        backgroundColor: Color.fromRGBO(219, 208, 241, 1),
       ),
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Color(0xFF8A2BE2), // Purple
-              Color(0xFFADD8E6), // Light Blue
+              Color(0xFF8A2BE2),
+              Color(0xFFADD8E6),
             ],
             begin: Alignment.bottomRight,
             end: Alignment.topLeft,
           ),
-        ), child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Image.asset(
-              'assets/pclogo.png', // Assuming your image is named 'pclogo.png' and located in the assets folder
-              height: 240, // Adjust height as needed
-              width: 240, // Adjust width as needed
-            ),
-            SizedBox(height: 100),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => LoginPage()),
-                );
-              },
-              style: ElevatedButton.styleFrom(
-                minimumSize: Size(260, 45),
-                backgroundColor: Color.fromRGBO(219, 208, 241, 1),  // Set the desired width and height
+        ),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Image.asset(
+                'assets/pclogo.png',
+                height: 240,
+                width: 240,
               ),
-              child: Text('Login'),
-              
-            ),
-            SizedBox(height: 20), // Add space between button
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => SignUpPage()),
-                );
-              },
-              style: ElevatedButton.styleFrom(
-                minimumSize: Size(260, 45), 
-                backgroundColor: Color.fromRGBO(219, 208, 241, 1), // Set the desired width and height
+              SizedBox(height: 100),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => LoginPage()),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  minimumSize: Size(260, 45),
+                  backgroundColor: Color.fromRGBO(219, 208, 241, 1),
+                ),
+                child: Text('Login'),
               ),
-              child: Text('Sign Up'),
-            ),
-          ],
+              SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => SignUpPage()),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  minimumSize: Size(260, 45),
+                  backgroundColor: Color.fromRGBO(219, 208, 241, 1),
+                ),
+                child: Text('Sign Up'),
+              ),
+            ],
+          ),
         ),
       ),
-    )
     );
   }
 }
-
 
 class LoginPage extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
@@ -101,85 +100,84 @@ class LoginPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Login'),
-        backgroundColor:  Color.fromRGBO(219, 208, 241, 1),  
+        backgroundColor: Color.fromRGBO(219, 208, 241, 1),
       ),
-      body:Container(
+      body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Color(0xFF8A2BE2), // Purple
-              Color(0xFFADD8E6), // Light Blue
+              Color(0xFF8A2BE2),
+              Color(0xFFADD8E6),
             ],
             begin: Alignment.bottomRight,
             end: Alignment.topLeft,
           ),
-        ), child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            children: <Widget>[
-              TextFormField(
-                controller: _usernameController,
-                decoration: InputDecoration(
-                  labelText: 'Username',
-                  prefixIcon: Icon(Icons.person),
-                ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter your username';
-                  }
-                  return null;
-                },
-              ),
-              SizedBox(height: 16),
-              TextFormField(
-                controller: _passwordController,
-                decoration: InputDecoration(
-                  labelText: 'Password',
-                  prefixIcon: Icon(Icons.lock),
-                ),
-                obscureText: true,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter your password';
-                  }
-                  return null;
-                },
-              ),
-              SizedBox(height: 40),
-              ElevatedButton(
-                onPressed: () async {
-                  if (_formKey.currentState!.validate()) {
-                    bool loggedIn = await Provider.of<AuthProvider>(context, listen: false).login(
-                      _usernameController.text,
-                      _passwordController.text,
-                    );
-                    if (loggedIn) {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => UserListPage()),
-                      );
-                    } else {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text('Invalid username or password')),
-                      );
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              children: <Widget>[
+                TextFormField(
+                  controller: _usernameController,
+                  decoration: InputDecoration(
+                    labelText: 'Username',
+                    prefixIcon: Icon(Icons.person),
+                  ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter your username';
                     }
-                  }
-                },
-                 style: ElevatedButton.styleFrom(
-                minimumSize: Size(320, 45),
-                backgroundColor: Color.fromRGBO(219, 208, 241, 1),
-                 ),
-                
-                child: Text('Login'),
-                
-              ),
-            ],
+                    return null;
+                  },
+                ),
+                SizedBox(height: 16),
+                TextFormField(
+                  controller: _passwordController,
+                  decoration: InputDecoration(
+                    labelText: 'Password',
+                    prefixIcon: Icon(Icons.lock),
+                  ),
+                  obscureText: true,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter your password';
+                    }
+                    return null;
+                  },
+                ),
+                SizedBox(height: 40),
+                ElevatedButton(
+                  onPressed: () async {
+                    if (_formKey.currentState!.validate()) {
+                      bool loggedIn = await Provider.of<AuthProvider>(context, listen: false).login(
+                        _usernameController.text,
+                        _passwordController.text,
+                      );
+                      if (loggedIn) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => UserListPage()),
+                        );
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text('Invalid username or password')),
+                        );
+                      }
+                    }
+                  },
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: Size(320, 45),
+                    backgroundColor: Color.fromRGBO(219, 208, 241, 1),
+                  ),
+                  child: Text('Login'),
+                ),
+              ],
+            ),
           ),
         ),
       ),
-    )
     );
   }
 }
@@ -195,89 +193,90 @@ class SignUpPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Sign Up'),
-        backgroundColor:  Color.fromRGBO(219, 208, 241, 1),  
+        backgroundColor: Color.fromRGBO(219, 208, 241, 1),
       ),
-      body:Container(
+      body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Color(0xFF8A2BE2), // Purple
-              Color(0xFFADD8E6), // Light Blue
+              Color(0xFF8A2BE2),
+              Color(0xFFADD8E6),
             ],
             begin: Alignment.bottomRight,
             end: Alignment.topLeft,
           ),
-        ), child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            children: <Widget>[
-              TextFormField(
-                controller: _usernameController,
-                decoration: InputDecoration(
-                  labelText: 'Username',
-                  prefixIcon: Icon(Icons.person),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              children: <Widget>[
+                TextFormField(
+                  controller: _usernameController,
+                  decoration: InputDecoration(
+                    labelText: 'Username',
+                    prefixIcon: Icon(Icons.person),
+                  ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter your username';
+                    }
+                    return null;
+                  },
                 ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter your username';
-                  }
-                  return null;
-                },
-              ),
-              SizedBox(height: 16),
-              TextFormField(
-                controller: _emailController,
-                decoration: InputDecoration(
-                  labelText: 'Email',
-                  prefixIcon: Icon(Icons.email),
+                SizedBox(height: 16),
+                TextFormField(
+                  controller: _emailController,
+                  decoration: InputDecoration(
+                    labelText: 'Email',
+                    prefixIcon: Icon(Icons.email),
+                  ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter your email';
+                    }
+                    return null;
+                  },
                 ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter your email';
-                  }
-                  return null;
-                },
-              ),
-              SizedBox(height: 16),
-              TextFormField(
-                controller: _passwordController,
-                decoration: InputDecoration(
-                  labelText: 'Password',
-                  prefixIcon: Icon(Icons.lock),
+                SizedBox(height: 16),
+                TextFormField(
+                  controller: _passwordController,
+                  decoration: InputDecoration(
+                    labelText: 'Password',
+                    prefixIcon: Icon(Icons.lock),
+                  ),
+                  obscureText: true,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter your password';
+                    }
+                    return null;
+                  },
                 ),
-                obscureText: true,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter your password';
-                  }
-                  return null;
-                },
-              ),
-              SizedBox(height: 40),
-              ElevatedButton(
-                onPressed: () async {
-                  if (_formKey.currentState!.validate()) {
-                    await Provider.of<AuthProvider>(context, listen: false).register(
-                      _usernameController.text,
-                      _emailController.text,
-                      _passwordController.text,
-                    );
-                    Navigator.pop(context);
-                  }
-                },style: ElevatedButton.styleFrom(
-                minimumSize: Size(320, 45),
-                backgroundColor: Color.fromRGBO(219, 208, 241, 1),
-               
+                SizedBox(height: 40),
+                ElevatedButton(
+                  onPressed: () async {
+                    if (_formKey.currentState!.validate()) {
+                      await Provider.of<AuthProvider>(context, listen: false).register(
+                        _usernameController.text,
+                        _emailController.text,
+                        _passwordController.text,
+                      );
+                      Navigator.pop(context);
+                    }
+                  },
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: Size(320, 45),
+                    backgroundColor: Color.fromRGBO(219, 208, 241, 1),
+                  ),
+                  child: Text('Register'),
                 ),
-                child: Text('Register'),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
-    )
     );
   }
 }
@@ -288,8 +287,19 @@ class UserListPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('User List'),
+         backgroundColor: Color.fromRGBO(219, 208, 241, 1),
       ),
-      body: FutureBuilder<List<Map<String, dynamic>>>(
+      body:Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Color(0xFF8A2BE2),
+              Color(0xFFADD8E6),
+            ],
+            begin: Alignment.bottomRight,
+            end: Alignment.topLeft,
+          ),
+        ),child:  FutureBuilder<List<Map<String, dynamic>>>(
         future: DatabaseHelper.instance.getUsers(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
@@ -312,6 +322,7 @@ class UserListPage extends StatelessWidget {
           }
         },
       ),
+    )
     );
   }
 }
