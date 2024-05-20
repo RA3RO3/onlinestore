@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'auth_provider.dart';
 import 'database_helper.dart';
+import 'start.dart';
 
 void main() {
   runApp(
@@ -151,16 +152,9 @@ class LoginPage extends StatelessWidget {
                 ElevatedButton(
                   onPressed: () async {
                     if (_formKey.currentState!.validate()) {
-                      bool loggedIn = await Provider.of<AuthProvider>(context, listen: false).login(
-                        _usernameController.text,
-                        _passwordController.text,
-                      );
-                      if (loggedIn) {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => UserListPage()),
-                        );
-                      } else {
+                      bool loggedIn = await Provider.of<AuthProvider>(context, listen: false)
+                          .login(context, _usernameController.text, _passwordController.text);
+                      if (!loggedIn) {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(content: Text('Invalid username or password')),
                         );
@@ -277,52 +271,6 @@ class SignUpPage extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
-}
-
-class UserListPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('User List'),
-         backgroundColor: Color.fromRGBO(219, 208, 241, 1),
-      ),
-      body:Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              Color(0xFF8A2BE2),
-              Color(0xFFADD8E6),
-            ],
-            begin: Alignment.bottomRight,
-            end: Alignment.topLeft,
-          ),
-        ),child:  FutureBuilder<List<Map<String, dynamic>>>(
-        future: DatabaseHelper.instance.getUsers(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
-          } else if (snapshot.hasError) {
-            return Center(child: Text('Error: ${snapshot.error}'));
-          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return Center(child: Text('No users found'));
-          } else {
-            return ListView.builder(
-              itemCount: snapshot.data!.length,
-              itemBuilder: (context, index) {
-                return ListTile(
-                  leading: Icon(Icons.person),
-                  title: Text(snapshot.data![index]['username']),
-                  subtitle: Text(snapshot.data![index]['email']),
-                );
-              },
-            );
-          }
-        },
-      ),
-    )
     );
   }
 }
