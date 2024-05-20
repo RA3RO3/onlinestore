@@ -5,7 +5,7 @@ class StartPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Shopping Court'),
+        title: Text('The Start'),
         backgroundColor: Color.fromRGBO(219, 208, 241, 1),
         actions: [
           IconButton(

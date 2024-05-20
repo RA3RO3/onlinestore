@@ -19,6 +19,9 @@ class CartPage extends StatelessWidget {
             end: Alignment.topLeft,
           ),
         ),
+        child: Center(
+          child: Text('Your cart items will be displayed here.'),
+        ),
       ),
     );
   }
