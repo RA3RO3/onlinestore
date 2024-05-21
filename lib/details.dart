@@ -37,16 +37,16 @@ class DetailsPage extends StatelessWidget {
             children: [
               Container(
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.black, width: 2), // Add border to the image
-                  borderRadius: BorderRadius.circular(12), // Add border radius to make it rounded
+                  border: Border.all(color: Colors.black, width: 2),
+                  borderRadius: BorderRadius.circular(12),
                 ),
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(10), // Clip the border radius to match the container
+                  borderRadius: BorderRadius.circular(10),
                   child: Image.asset(
                     image,
-                    height: 200, // Adjust the height as needed
-                    width: 200, // Adjust the width as needed
-                    fit: BoxFit.cover, // Make the image fit within the container
+                    height: 200,
+                    width: 200,
+                    fit: BoxFit.cover,
                   ),
                 ),
               ),

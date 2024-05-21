@@ -41,7 +41,7 @@ class StartPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Computer Store'),
-        backgroundColor: Color.fromRGBO(219, 208, 241, 1), // Matched app bar color
+        backgroundColor: Color.fromRGBO(219, 208, 241, 1),
         actions: [
           IconButton(
             icon: Icon(Icons.shopping_cart),
@@ -58,8 +58,8 @@ class StartPage extends StatelessWidget {
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Color(0xFF8A2BE2), // Matched background color
-              Color(0xFFADD8E6), // Matched background color
+              Color(0xFF8A2BE2),
+              Color(0xFFADD8E6),
             ],
             begin: Alignment.bottomRight,
             end: Alignment.topLeft,
@@ -68,14 +68,14 @@ class StartPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            SizedBox(height: 18), // Add spacing
+            SizedBox(height: 18),
             Align(
               alignment: Alignment.topCenter,
               child: Container(
                 padding: EdgeInsets.all(10),
                 decoration: BoxDecoration(
-                  color: Color.fromRGBO(219, 208, 241, 1), // Matched app bar color
-                  borderRadius: BorderRadius.circular(20), // Circular edges
+                  color: Color.fromRGBO(219, 208, 241, 1),
+                  borderRadius: BorderRadius.circular(20),
                 ),
                 child: Text(
                   "Today's Available Items For You",
@@ -88,7 +88,6 @@ class StartPage extends StatelessWidget {
               ),
             ),
             SizedBox(height: 8),
-            // Add space between the sentence and the GridView
             Expanded(
               child: GridView.count(
                 crossAxisCount: 2,
@@ -150,9 +149,8 @@ class ProductCard extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center, // Center horizontally
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    // Center the name text vertically
                     Center(
                       child: Text(
                         name,
@@ -163,7 +161,6 @@ class ProductCard extends StatelessWidget {
                       ),
                     ),
                     SizedBox(height: 1),
-                    // Center the price text vertically
                     Center(
                       child: Text(
                         '\$$price',
