@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'auth_provider.dart';
-import 'database_helper.dart';
+import 'cart_provider.dart';
 import 'start.dart';
 
 void main() {
   runApp(
-    ChangeNotifierProvider(
-      create: (context) => AuthProvider(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => AuthProvider()),
+        ChangeNotifierProvider(create: (context) => CartProvider()),
+      ],
       child: MyApp(),
     ),
   );
