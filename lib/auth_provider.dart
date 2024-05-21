@@ -4,8 +4,10 @@ import 'start.dart';
 
 class AuthProvider extends ChangeNotifier {
   String? _currentUsername;
+  int? _userId;
 
   String? get currentUsername => _currentUsername;
+  int? get userId => _userId;
 
   Future<bool> login(BuildContext context, String username, String password) async {
     final db = await DatabaseHelper.instance.database;
@@ -14,9 +16,11 @@ class AuthProvider extends ChangeNotifier {
       where: 'username = ? AND password = ?',
       whereArgs: [username, password],
     );
+
     bool loggedIn = res.isNotEmpty;
     if (loggedIn) {
       _currentUsername = username;
+      _userId = res.first['id'] as int;
       notifyListeners();
       Navigator.pushReplacement(
         context,

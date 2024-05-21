@@ -9,12 +9,16 @@ void main() {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => AuthProvider()),
-        ChangeNotifierProvider(create: (context) => CartProvider()),
+        ChangeNotifierProxyProvider<AuthProvider, CartProvider>(
+          create: (context) => CartProvider(context.read<AuthProvider>()),
+          update: (context, auth, previousCart) => CartProvider(auth),
+        ),
       ],
       child: MyApp(),
     ),
   );
 }
+
 
 class MyApp extends StatelessWidget {
   @override
@@ -277,4 +281,3 @@ class SignUpPage extends StatelessWidget {
     );
   }
 }
-
