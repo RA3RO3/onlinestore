@@ -30,6 +30,7 @@ class AuthProvider extends ChangeNotifier {
     return loggedIn;
   }
 
+
   Future<void> register(String username, String email, String password) async {
     final db = await DatabaseHelper.instance.database;
     await db.insert('users', {

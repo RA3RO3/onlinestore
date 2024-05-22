@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'auth_provider.dart';
 import 'cart_provider.dart';
-import 'start.dart';
 
 void main() {
   runApp(
@@ -98,10 +97,16 @@ class HomePage extends StatelessWidget {
   }
 }
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
+  @override
+  _LoginPageState createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  bool _isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -156,24 +161,32 @@ class LoginPage extends StatelessWidget {
                   },
                 ),
                 SizedBox(height: 40),
-                ElevatedButton(
-                  onPressed: () async {
-                    if (_formKey.currentState!.validate()) {
-                      bool loggedIn = await Provider.of<AuthProvider>(context, listen: false)
-                          .login(context, _usernameController.text, _passwordController.text);
-                      if (!loggedIn) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text('Invalid username or password')),
-                        );
-                      }
-                    }
-                  },
-                  style: ElevatedButton.styleFrom(
-                    minimumSize: Size(320, 45),
-                    backgroundColor: Color.fromRGBO(219, 208, 241, 1),
-                  ),
-                  child: Text('Login'),
-                ),
+                _isLoading
+                    ? CircularProgressIndicator()
+                    : ElevatedButton(
+                        onPressed: () async {
+                          if (_formKey.currentState!.validate()) {
+                            setState(() {
+                              _isLoading = true;
+                            });
+                            bool loggedIn = await Provider.of<AuthProvider>(context, listen: false)
+                                .login(context, _usernameController.text, _passwordController.text);
+                            setState(() {
+                              _isLoading = false;
+                            });
+                            if (!loggedIn) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text('Invalid username or password')),
+                              );
+                            }
+                          }
+                        },
+                        style: ElevatedButton.styleFrom(
+                          minimumSize: Size(320, 45),
+                          backgroundColor: Color.fromRGBO(219, 208, 241, 1),
+                        ),
+                        child: Text('Login'),
+                      ),
               ],
             ),
           ),
